@@ -34,8 +34,8 @@ public class ProductController {
         return productService.getProductList();
     }
 
-    @GetMapping("products/{id}")
-    public Product detail(Long id) {
+    @GetMapping("/{id}")
+    public Product detail(@PathVariable Long id) {
         return productService.getProduct(id);
     }
 
@@ -45,7 +45,7 @@ public class ProductController {
         return productService.createProduct(productData);
     }
 
-    @PatchMapping("products/{id}")
+    @PatchMapping("/{id}")
     public Product update(
             @PathVariable Long id,
             @RequestBody @Valid ProductData productData
@@ -53,7 +53,7 @@ public class ProductController {
         return productService.updateProduct(id, productData);
     }
 
-    @DeleteMapping("products/{id}")
+    @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id) {
         productService.deleteProduct(id);
     }

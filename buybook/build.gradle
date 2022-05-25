@@ -1,6 +1,9 @@
 plugins {
 	id 'org.springframework.boot' version '2.7.1-SNAPSHOT'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+
+	// Ascii Doctor
+	id 'org.asciidoctor.jvm.convert' version '3.3.2'
 	id 'java'
 }
 
@@ -20,6 +23,10 @@ repositories {
 	maven { url 'https://repo.spring.io/snapshot' }
 }
 
+ext {
+	set('snippetsDir', file("build/generated-snippets"))
+}
+
 dependencies {
 	// JUnit 5
 	testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
@@ -30,6 +37,10 @@ dependencies {
 
 	// Spring Framework test
 	testImplementation 'org.springframework.boot:spring-boot-starter-test:2.6.7'
+
+	// Spring REST Docs
+	testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
+
 
 	// Spring Data JPA
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
@@ -58,5 +69,11 @@ dependencies {
 }
 
 tasks.named('test') {
+	outputs.dir snippetsDir
 	useJUnitPlatform()
+}
+
+tasks.named('asciidoctor') {
+	inputs.dir snippetsDir
+	dependsOn test
 }

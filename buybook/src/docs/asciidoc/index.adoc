@@ -1,0 +1,20 @@
+= BuyBook API Document
+
+== GET /products
+
+상품 목록을 JSON 형태로 반환한다.
+
+include::{snippets}/get-product-list/http-request.adoc[]
+
+include::{snippets}/get-product-list/http-response.adoc[]
+
+== GET /products/{id}
+
+상품 상세 정보를 JSON 형태로 반환한다.
+
+include::{snippets}/get-product/http-request.adoc[]
+
+include::{snippets}/get-product/http-response.adoc[]
+
+
+
