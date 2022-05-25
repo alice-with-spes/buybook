@@ -16,5 +16,3 @@ include::{snippets}/get-product/http-request.adoc[]
 
 include::{snippets}/get-product/http-response.adoc[]
 
-
-
