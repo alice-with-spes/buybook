@@ -12,7 +12,7 @@
 아래의 명령어를 실행하여 배포한 이미지를 받을 수 있습니다.
 
 ```bash
-docker run -p 8080:8080 bloomspes/buybook
+docker pull bloomspes/buybook:(버전명)
 ```
 
 받은 이미지를 실행하기 위해 아래의 명령어를 입력합니다.
