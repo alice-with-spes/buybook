@@ -15,6 +15,11 @@
 docker run -p 8080:8080 bloomspes/buybook
 ```
 
+받은 이미지를 실행하기 위해 아래의 명령어를 입력합니다.
+```bash
+ docker run -it --rm --name api-server -v $(pwd)/build/libs:/home/api-server -p 80:8080 -e SPRING_PROFILES_ACTIVE=mariadb --network buybook openjdk:17 bash -c "java -jar /home/api-server/buybook-0.0.1-SNAPSHOT.jar"
+```
+
 받은 이미지를 확인하는 명령어는 다음과 같습니다.
 
 ```bash
@@ -27,7 +32,7 @@ GET /products
 
 상품 목록을 조회합니다.
 
-http GET http://localhost:8080/products
+http GET http://localhost/products
 ```
 
 ```
@@ -35,5 +40,5 @@ GET /products/{id}
 
 상품의 상세 정보를 조회합니다.
 
-http GET https://localhost:8080/products/id
+http GET https://localhost/products/id
 ```
