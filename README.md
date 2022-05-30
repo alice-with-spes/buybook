@@ -9,6 +9,19 @@
 
 ## Docker Hub에 배포한 이미지를 받아서 컨테이너로 실행하기
 
+아래의 명령어를 실행해서 `mariaDB` 컨테이너 이미지를 받습니다.
+
+```bash
+docker run -d --name mariadb \
+  --network buybook \
+  -p 3306:3306 \
+  -e MYSQL_ROOT_PASSWORD=password \
+  -e MYSQL_DATABASE=test \
+  mariadb \
+  --character-set-server=utf8mb4 \
+  --collation-server=utf8mb4_unicode_ci
+```
+
 아래의 명령어를 실행하여 배포한 이미지를 받을 수 있습니다.
 
 ```bash
