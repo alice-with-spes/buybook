@@ -40,9 +40,9 @@ dependencies {
 
     // Spring Data JPA
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    // Hibernate ORM
     runtimeOnly 'com.h2database:h2:2.1.212'
     runtimeOnly 'org.mariadb.jdbc:mariadb-java-client:3.0.5'
+    runtimeOnly 'org.postgresql:postgresql:42.3.6'
 
     // Web
     implementation 'org.springframework.boot:spring-boot-starter-web'

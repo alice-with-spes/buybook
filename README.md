@@ -64,6 +64,14 @@ docker push bloomspes/buybook
 
 Docker Hub: <https://hub.docker.com/r/bloomspes/buybook>
 
+## Heroku로 서버 배포
+
+```bash
+git push heroku main
+
+heroku logs --tail
+```
+
 ## API 문서
 
 <https://codesoom-project.github.io/buybook-project/>
