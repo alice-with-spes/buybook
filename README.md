@@ -1,57 +1,83 @@
 # buybook
-도서를 구매할 수 있는 온라인 쇼핑몰 서비스
 
-## Docker 설치 하기
+도서를 구매할 수 있는 온라인 쇼핑몰 서비스.
 
-먼저, 배포 환경을 내려받을 수 있도록 로컬 환경에 도커 엔진을 설치 합니다.
-
-- [Windows 용 도커 설치 하기](https://docs.docker.com/desktop/windows/install/)
-
-## Docker Hub에 배포한 이미지를 받아서 컨테이너로 실행하기
-
-아래의 명령어를 실행해서 `mariaDB` 컨테이너 이미지를 받습니다.
+## REST Docs 문서 생성
 
 ```bash
-docker run -d --name mariadb \
-  --network buybook \
+./gradlew asciidoctor
+```
+
+```bash
+open build/docs/asciidoc/index.html
+```
+
+## 로컬에서 Jar 빌드하고 실행하기
+
+```bash
+./gradlew bootJar
+```
+
+```bash
+java -jar build/libs/buybook-*.jar
+```
+
+## MariaDB 사용하도록 Jar 실행
+
+먼저 MariaDB 서버 띄우기.
+
+```bash
+docker run -d --name buybook-mariadb \
   -p 3306:3306 \
   -e MYSQL_ROOT_PASSWORD=password \
-  -e MYSQL_DATABASE=test \
+  -e MYSQL_DATABASE=buybook \
   mariadb \
   --character-set-server=utf8mb4 \
   --collation-server=utf8mb4_unicode_ci
+
+docker logs -f buybook-mariadb
 ```
 
-아래의 명령어를 실행하여 배포한 이미지를 받을 수 있습니다.
+환경변수로 DB 정보 전달하면서 실행.
 
 ```bash
-docker pull bloomspes/buybook:(버전명)
+SPRING_PROFILES_ACTIVE=mariadb \
+DB_HOST=localhost \
+DB_PORT=3306 \
+DB_DATABSE=buybook \
+DB_USERNAME=root \
+DB_PASSWORD=password \
+java -jar build/libs/buybook-*.jar
 ```
 
-받은 이미지를 실행하기 위해 아래의 명령어를 입력합니다.
+## Docker 빌드하고 Docker Hub에 올리기
+
 ```bash
- docker run -it --rm --name api-server -v $(pwd)/build/libs:/home/api-server -p 80:8080 -e SPRING_PROFILES_ACTIVE=mariadb --network buybook openjdk:17 bash -c "java -jar /home/api-server/buybook-0.0.1-SNAPSHOT.jar"
+./gradlew clean bootJar
+
+docker build -t buybook .
+
+docker tag buybook bloomspes/buybook
+
+docker push bloomspes/buybook
 ```
 
-받은 이미지를 확인하는 명령어는 다음과 같습니다.
+Docker Hub: <https://hub.docker.com/r/bloomspes/buybook>
+
+## API 문서
+
+<https://codesoom-project.github.io/buybook-project/>
+
+### HTTPie로 확인
+
+상품 목록 조회:
 
 ```bash
-docker images
-```
-
-## 배포한 서버에서 HTTP 요청 - 응답 확인하기
-```
-GET /products
-
-상품 목록을 조회합니다.
-
 http GET http://localhost/products
 ```
 
-```
-GET /products/{id}
+상품 상세 정보 조회:
 
-상품의 상세 정보를 조회합니다.
-
-http GET https://localhost/products/id
+```bash
+http GET https://localhost/products/{id}
 ```
