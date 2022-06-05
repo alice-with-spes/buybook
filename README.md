@@ -9,7 +9,7 @@
 ```
 
 ```bash
-open build/docs/asciidoc/index.html
+open buybook-api/build/docs/asciidoc/index.html
 ```
 
 ## 로컬에서 Jar 빌드하고 실행하기
@@ -19,7 +19,7 @@ open build/docs/asciidoc/index.html
 ```
 
 ```bash
-java -jar build/libs/buybook-*.jar
+java -jar buybook-api/build/libs/buybook-api-*.jar
 ```
 
 ## MariaDB 사용하도록 Jar 실행
@@ -47,7 +47,7 @@ DB_PORT=3306 \
 DB_DATABSE=buybook \
 DB_USERNAME=root \
 DB_PASSWORD=password \
-java -jar build/libs/buybook-*.jar
+java -jar buybook-api/build/libs/buybook-api-*.jar
 ```
 
 ## Docker 빌드하고 Docker Hub에 올리기
@@ -55,7 +55,7 @@ java -jar build/libs/buybook-*.jar
 ```bash
 ./gradlew clean bootJar
 
-docker build -t buybook .
+docker build -t buybook ./buybook-api
 
 docker tag buybook bloomspes/buybook
 
