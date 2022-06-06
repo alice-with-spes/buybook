@@ -3,6 +3,7 @@ package com.example.demo.buybook.controllers;
 import com.example.demo.buybook.application.ProductService;
 import com.example.demo.buybook.domain.Product;
 import com.example.demo.buybook.dto.ProductData;
+import com.example.demo.buybook.mapper.ProductMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,21 +18,28 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.stream.Stream;
 
 @RestController
 @RequestMapping("/products")
 @CrossOrigin
 public class ProductController {
 
+    private final ProductMapper productMapper;
     private final ProductService productService;
 
-    public ProductController(ProductService productService) {
+    public ProductController(
+            ProductMapper productMapper,
+            ProductService productService
+    ) {
+        this.productMapper = productMapper;
         this.productService = productService;
     }
 
     @GetMapping
-    public List<Product> list() {
-        return productService.getProductList();
+    public Stream<ProductData> list() {
+        List<Product> products = productService.getProductList();
+        return products.stream().map(productMapper::productToProductData);
     }
 
     @GetMapping("/{id}")

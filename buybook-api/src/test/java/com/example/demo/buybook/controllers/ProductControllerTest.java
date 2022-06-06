@@ -4,12 +4,14 @@ import com.example.demo.buybook.application.ProductService;
 import com.example.demo.buybook.domain.Product;
 import com.example.demo.buybook.dto.ProductData;
 import com.example.demo.buybook.errors.ProductNotFoundException;
+import com.example.demo.buybook.mapper.ProductMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
 import org.springframework.restdocs.payload.JsonFieldType;
@@ -34,9 +36,11 @@ class ProductControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
+    @SpyBean
+    private ProductMapper productMapper;
+
     @MockBean
     private ProductService productService;
-
 
     @BeforeEach
     void setUp() {
@@ -50,9 +54,11 @@ class ProductControllerTest {
 
         given(productService.getProduct(1L)).willReturn(product);
 
-        given(productService.getProduct(10L)).willThrow(new ProductNotFoundException(10L));
+        given(productService.getProduct(10L))
+                .willThrow(new ProductNotFoundException(10L));
 
-        given(productService.createProduct(any(ProductData.class))).willReturn(product);
+        given(productService.createProduct(any(ProductData.class)))
+                .willReturn(product);
 
         given(productService.updateProduct(eq(1L), any(ProductData.class)))
                 .will(invocation -> {
@@ -70,15 +76,16 @@ class ProductControllerTest {
         given(productService.updateProduct(eq(10L), any(ProductData.class)))
                 .willThrow(new ProductNotFoundException(product.getId()));
 
-        given(productService.deleteProduct(10L)).willThrow(new ProductNotFoundException(product.getId()));
+        given(productService.deleteProduct(10L))
+                .willThrow(new ProductNotFoundException(product.getId()));
 
     }
 
     @Test
     void 제품_목록을_가져오는데_성공한다() throws Exception {
         mockMvc.perform(
-                RestDocumentationRequestBuilders.get("/products")
-                        .accept(MediaType.APPLICATION_JSON)
+                        RestDocumentationRequestBuilders.get("/products")
+                                .accept(MediaType.APPLICATION_JSON)
                 )
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString("code")))
@@ -99,8 +106,8 @@ class ProductControllerTest {
     @Test
     void 제품의_상세_정보를_가져온다() throws Exception {
         mockMvc.perform(
-                RestDocumentationRequestBuilders.get("/products/1")
-                        .accept(MediaType.APPLICATION_JSON))
+                        RestDocumentationRequestBuilders.get("/products/1")
+                                .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString("code")))
                 .andDo(document("get-product",

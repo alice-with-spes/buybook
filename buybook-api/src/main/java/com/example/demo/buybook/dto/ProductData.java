@@ -1,12 +1,13 @@
 package com.example.demo.buybook.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
 
+@NoArgsConstructor
 @Builder
 @Getter
 @Setter
@@ -18,10 +19,6 @@ public class ProductData {
 
     @NotBlank
     private String publisher;
-
-    public ProductData() {
-
-    }
 
     public ProductData(Long id, String title, String publisher) {
         this.id = id;

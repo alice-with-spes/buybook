@@ -15,9 +15,13 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String title;
 
     private String publisher;
+
+    protected Product() {
+    }
 
     @Builder
     public Product(Long id, String title, String publisher) {
@@ -26,12 +30,17 @@ public class Product {
         this.publisher = publisher;
     }
 
-    protected Product() {
-
+    public void changeTitle(String title) {
+        this.title = title;
     }
 
-    public void change(String title, String publisher) {
-        this.title = title;
+
+    public void changePublisher(String publisher) {
         this.publisher = publisher;
+    }
+
+    public void destroy() {
+        // TODO: soft delete
+        // this.deleted = true;
     }
 }
