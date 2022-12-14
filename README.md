@@ -44,7 +44,7 @@ docker logs -f buybook-mariadb
 SPRING_PROFILES_ACTIVE=mariadb \
 DB_HOST=localhost \
 DB_PORT=3306 \
-DB_DATABSE=buybook \
+DB_DATABASE=buybook \
 DB_USERNAME=root \
 DB_PASSWORD=password \
 java -jar buybook-api/build/libs/buybook-api-*.jar
