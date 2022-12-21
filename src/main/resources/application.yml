@@ -1,0 +1,35 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres?user=postgres&password=password
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+backdoor:
+  active: true
+
+---
+spring:
+  config:
+    activate:
+      on-profile: test
+  datasource:
+    url: jdbc:h2:mem:test
+    username: sa
+    password:
+
+---
+spring:
+  config:
+    activate:
+      on-profile: production
+  datasource:
+    url: jdbc:${DATABASE_URL}
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+
+backdoor:
+  active: ${BACKDOOR:false}
