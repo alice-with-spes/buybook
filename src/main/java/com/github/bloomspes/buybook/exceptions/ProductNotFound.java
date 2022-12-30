@@ -1,6 +1,6 @@
-package com.github.buybook.exceptions;
+package com.github.bloomspes.buybook.exceptions;
 
-import com.github.buybook.domain.ProductId;
+import com.github.bloomspes.buybook.domain.ProductId;
 
 public class ProductNotFound extends RuntimeException {
     public ProductNotFound(ProductId id) {

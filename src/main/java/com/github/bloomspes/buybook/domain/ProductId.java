@@ -1,4 +1,4 @@
-package com.github.buybook.domain;
+package com.github.bloomspes.buybook.domain;
 
 import jakarta.persistence.Column;
 

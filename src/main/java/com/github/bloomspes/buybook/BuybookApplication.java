@@ -1,4 +1,4 @@
-package com.github.buybook;
+package com.github.bloomspes.buybook;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -11,7 +11,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.config.Configuration.AccessLevel;
 
-import com.github.buybook.interceptors.BackdoorControlInterceptor;
+import com.github.bloomspes.buybook.interceptors.BackdoorControlInterceptor;
 
 @SpringBootApplication
 public class BuybookApplication {

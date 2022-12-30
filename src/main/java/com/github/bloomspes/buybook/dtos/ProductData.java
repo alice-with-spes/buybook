@@ -1,4 +1,4 @@
-package com.github.buybook.dtos;
+package com.github.bloomspes.buybook.dtos;
 
 import lombok.Getter;
 

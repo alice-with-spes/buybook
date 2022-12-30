@@ -1,4 +1,4 @@
-package com.github.buybook.interceptors;
+package com.github.bloomspes.buybook.interceptors;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
