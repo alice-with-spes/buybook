@@ -1,4 +1,4 @@
-package org.github.buybook.bloomspes.controllers;
+package com.github.bloomspes.buybook.controllers;
 
 import java.util.List;
 
@@ -15,11 +15,11 @@ import org.springframework.restdocs.payload.JsonFieldType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
-import org.github.buybook.bloomspes.application.GetProductService;
-import org.github.buybook.bloomspes.application.GetProductsService;
-import org.github.buybook.bloomspes.domain.Product;
-import org.github.buybook.bloomspes.domain.ProductId;
-import org.github.buybook.bloomspes.exceptions.ProductNotFound;
+import com.github.bloomspes.buybook.FakeModelFactory;
+import com.github.bloomspes.buybook.application.GetProductService;
+import com.github.bloomspes.buybook.application.GetProductsService;
+import com.github.bloomspes.buybook.domain.ProductId;
+import com.github.bloomspes.buybook.exceptions.ProductNotFound;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.mockito.ArgumentMatchers.any;
@@ -47,7 +47,7 @@ class ProductControllerTest {
     @DisplayName("GET /products")
     void list() throws Exception {
         given(getProductsService.getProducts())
-                .willReturn(List.of(Product.fake(1L)));
+                .willReturn(List.of(FakeModelFactory.product(1L)));
 
         mockMvc.perform(
                         RestDocumentationRequestBuilders.get("/products")
@@ -77,7 +77,7 @@ class ProductControllerTest {
     @DisplayName("GET /products/{id} (when product exists)")
     void detail() throws Exception {
         given(getProductService.getProduct(any()))
-                .willReturn(Product.fake(1L));
+                .willReturn(FakeModelFactory.product(1L));
 
         mockMvc.perform(
                         RestDocumentationRequestBuilders.get("/products/1")

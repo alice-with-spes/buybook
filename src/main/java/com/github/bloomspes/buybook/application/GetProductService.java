@@ -1,12 +1,12 @@
-package org.github.buybook.bloomspes.application;
+package com.github.bloomspes.buybook.application;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import org.github.buybook.bloomspes.domain.Product;
-import org.github.buybook.bloomspes.domain.ProductId;
-import org.github.buybook.bloomspes.exceptions.ProductNotFound;
-import org.github.buybook.bloomspes.repositories.ProductRepository;
+import com.github.bloomspes.buybook.domain.Product;
+import com.github.bloomspes.buybook.domain.ProductId;
+import com.github.bloomspes.buybook.exceptions.ProductNotFound;
+import com.github.bloomspes.buybook.repositories.ProductRepository;
 
 @Service
 @Transactional(readOnly = true)

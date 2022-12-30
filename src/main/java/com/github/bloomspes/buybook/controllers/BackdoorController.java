@@ -1,4 +1,4 @@
-package org.github.buybook.bloomspes.controllers;
+package com.github.bloomspes.buybook.controllers;
 
 import java.time.LocalDateTime;
 

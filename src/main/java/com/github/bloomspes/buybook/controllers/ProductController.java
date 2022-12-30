@@ -1,4 +1,4 @@
-package org.github.buybook.bloomspes.controllers;
+package com.github.bloomspes.buybook.controllers;
 
 import java.util.List;
 import java.util.stream.Stream;
@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import org.modelmapper.ModelMapper;
 
-import org.github.buybook.bloomspes.application.GetProductService;
-import org.github.buybook.bloomspes.application.GetProductsService;
-import org.github.buybook.bloomspes.domain.Product;
-import org.github.buybook.bloomspes.domain.ProductId;
-import org.github.buybook.bloomspes.dtos.ProductData;
-import org.github.buybook.bloomspes.exceptions.ProductNotFound;
+import com.github.bloomspes.buybook.application.GetProductService;
+import com.github.bloomspes.buybook.application.GetProductsService;
+import com.github.bloomspes.buybook.domain.Product;
+import com.github.bloomspes.buybook.domain.ProductId;
+import com.github.bloomspes.buybook.dtos.ProductData;
+import com.github.bloomspes.buybook.exceptions.ProductNotFound;
 
 @RestController
 @RequestMapping("/products")

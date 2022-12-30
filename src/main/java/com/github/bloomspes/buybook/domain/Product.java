@@ -1,4 +1,4 @@
-package org.github.buybook.bloomspes.domain;
+package com.github.bloomspes.buybook.domain;
 
 import java.time.LocalDateTime;
 
@@ -38,13 +38,5 @@ public class Product {
         this.id = id;
         this.title = title;
         this.publisher = publisher;
-    }
-
-    public static Product fake(Long id) {
-        return Product.builder()
-                .id(new ProductId(id))
-                .title("CODE")
-                .publisher("Insight")
-                .build();
     }
 }
